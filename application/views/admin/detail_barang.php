@@ -37,8 +37,7 @@
 	    			</tr>
 	    		</table>
 
-	    		<?php echo anchor('dashboard/tambah_ke_keranjang/'.$brg->id_brg, '<div class="btn btn-sm btn-primary">Tambah ke keranjang</div>') ?>
-	    		<?php echo anchor('welcome', '<div class="btn btn-sm btn-danger">Kembali</div>') ?>
+	    		<?php echo anchor('admin/data_barang/', '<div class="btn btn-sm btn-danger">Kembali</div>') ?>
 
 	    	</div>
 	    </div>

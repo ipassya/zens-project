@@ -1,37 +1,48 @@
 <div class="container-fluid">
-	<h4>Detail Pesanan <div class="btn btn-sm btn-success">No. Invoice: <?php echo $invoice->id; ?></div></h4>
+	<div class="card shadow mb-4">
+	    <div class="card-header py-3">
+			<h4>Detail Pesanan <div class="btn btn-sm btn-success">No. Invoice: <?php echo $invoice->id; ?></div></h4>
+		</div>
+		<div class="card-body">
+	      <div class="table-responsive">
+			<table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
+				<thead>
+					<tr class="text-center">
+						<th>ID Barang</th>
+						<th>Nama Produk</th>
+						<th>Jumlah Pesanan</th>
+						<th>Harga Satuan</th>
+						<th>Sub Total</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<?php 
+					$total = 0;
+					foreach ($pesanan as $psn) :
+						$subtotal = $psn->jumlah * $psn->harga;
+						$total += $subtotal;
+					?>
 
-	<table class="table table-bordered table-hover table-striped">
-		<tr>
-			<th>ID Barang</th>
-			<th>Nama Produk</th>
-			<th>Jumlah Pesanan</th>
-			<th>Harga Satuan</th>
-			<th>Sub Total</th>
-		</tr>
+					<tr class="text-center">
+						<td><?= $psn->id_brg; ?></td>
+						<td><?= $psn->nama_brg; ?></td>
+						<td><?= $psn->jumlah; ?></td>
+						<td>Rp. <?= number_format($psn->harga, '0','','.'); ?></td>
+						<td>Rp. <?= number_format($subtotal, '0','','.'); ?></td>
+					</tr>
 
-		<?php 
-		$total = 0;
-		foreach ($pesanan as $psn) :
-			$subtotal = $psn->jumlah * $psn->harga;
-			$total += $subtotal;
-		?>
+					<?php endforeach; ?>
 
-		<tr>
-			<td><?= $psn->id_brg; ?></td>
-			<td><?= $psn->nama_brg; ?></td>
-			<td><?= $psn->jumlah; ?></td>
-			<td><?= number_format($psn->harga, '0','','.'); ?></td>
-			<td><?= number_format($subtotal, '0','','.'); ?></td>
-		</tr>
+					<tr>
+						<td colspan="4" align="right">Grand Total</td>
+						<td class="text-center">Rp. <?= number_format($total, '0','','.');  ?></td>
+					</tr>
+				</tbody>
+			</table>
 
-		<?php endforeach; ?>
-
-		<tr>
-			<td colspan="4" align="right">Grand Total</td>
-			<td align="right">Rp. <?= number_format($total, '0','','.');  ?></td>
-		</tr>
-	</table>
-
-	<a href="<?php echo base_url('admin/invoice/index') ?>"><div class="btn btn-sm btn-primary">Kembali</div></a>
+			<a href="<?php echo base_url('admin/invoice/index') ?>"><div class="btn btn-sm btn-primary">Kembali</div></a>
+		  </div>
+	    </div>
+      </div>
 </div>

@@ -16,7 +16,7 @@ class Data_barang extends CI_Controller {
 	}
 	
 	public function index() {
-		$data['barang'] = $this->model_barang->tampil_data()->result();
+		$data['barang'] = $this->model_barang->tampil_datas()->result();
 		$this->load->view('templates_admin/header');
 		$this->load->view('templates_admin/sidebar');
 		$this->load->view('admin/data_barang', $data);
@@ -93,6 +93,14 @@ class Data_barang extends CI_Controller {
 		$where = array('id_brg' => $id);
 		$this->model_barang->hapus_data($where, 'tb_barang');
 		redirect('admin/data_barang/index');
+	}
+
+	public function detail($id) {
+		$data['barang'] = $this->model_barang->detail_brg($id);
+		$this->load->view('templates_admin/header');
+		$this->load->view('templates_admin/sidebar');
+		$this->load->view('admin/detail_barang', $data);
+		$this->load->view('templates_admin/footer');
 	}
 }
 

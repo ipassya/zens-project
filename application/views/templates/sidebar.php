@@ -84,14 +84,16 @@
           </button>
 
           <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="<?php echo base_url('welcome/search') ?>" method="post">
             <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+              <input type="text" class="form-control bg-light border-0 small" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2" name="keyword">
               <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fas fa-search fa-sm"></i>
-                </button>
+              <!-- <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2"> -->
+                <button type="submit" class="btn btn-primary"><i class="fas fa-search fa-sm"></i></button>
               </div>
+                <!-- <button class="btn btn-primary" type="button">
+                  <i class="fas fa-search fa-sm"></i>
+                </button> -->
             </div>
           </form>
 
@@ -122,7 +124,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li>
                   <?php 
-                  $keranjang = 'Keranjang Belanja: '.$this->cart->total_items(). ' items'
+                  $keranjang = '<i class="fas fa-shopping-cart"></i>  : '.$this->cart->total_items(). ' items'
                   ?>
 
                   <?php echo anchor('dashboard/detail_keranjang', $keranjang) ?>
@@ -130,14 +132,45 @@
               </ul>
               <div class="topbar-divider d-none d-sm-block"></div>
 
-                <ul class="nav navbar-nav navbar-right">
+                <!-- <ul class="nav navbar-nav navbar-right">
                   <?php if ($this->session->userdata('username')) { ?>
                     <li><div>Selamat Datang <?php echo $this->session->userdata('username') ?></div></li>
-                    <li class="ml-2"><?php echo anchor('auth/logout', 'Logout') ?></li>
+                    <li class="ml-2"> -->
+                      <!-- <?php //echo anchor('auth/logout', '<div data-toggle="modal" data-target="#logoutModal">Logout</div>') ?>  -->
+                      <!-- <a href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+                    </li>
                   <?php } else { ?>
                     <li><?php echo anchor('auth/login', 'Login') ?></li>
                   <?php } ?>
-                </ul>
+                </ul> -->
+
+                <!-- Nav Item - User Information -->
+                <li class="nav-item dropdown no-arrow">
+                  <?php if ($this->session->userdata('username')) { ?>
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <span class="mr-2 d-none d-lg-inline text-gray-600 large"><?php echo $this->session->userdata('username') ?></span>
+                      <img class="img-profile rounded-circle" src="<?php echo base_url('assets/img/user.png') ?>">
+                    </a>
+                    <!-- Dropdown - User Information -->
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                      <a class="dropdown-item" href="#">
+                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Profile
+                      </a>
+                      <a class="dropdown-item" href="<?php echo base_url('dashboard/detail_keranjang') ?>">
+                        <i class="fas fa-shopping-cart fa-fw fa-sm mr-2 text-gray-400"></i>
+                        Keranjang
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Logout
+                      </a>
+                    </div>
+                    <?php } else { ?>
+                      <li><?php echo anchor('auth/login', 'Login') ?></li>
+                    <?php } ?>
+                </li>
 
             </div>
 
@@ -145,3 +178,22 @@
 
         </nav>
         <!-- End of Topbar -->
+
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Yakin mau logout?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">Pilih logout kalo iya.</div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="<?php echo base_url().'auth/logout' ?>">Logout</a>
+              </div>
+            </div>
+          </div>
+        </div>

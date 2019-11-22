@@ -49,10 +49,4 @@
       </div>
     <?php endforeach; ?>
   </div>
-  <div class="row">
-      <div class="col">
-        <!--Tampilkan pagination-->
-        <?php echo $pagination; ?>
-      </div>
-    </div>
 </div>

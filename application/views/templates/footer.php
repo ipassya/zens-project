@@ -15,6 +15,18 @@
   <script src="<?php echo base_url() ?>assets/js/demo/chart-area-demo.js"></script>
   <script src="<?php echo base_url() ?>assets/js/demo/chart-pie-demo.js"></script>
 
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script src="<?php echo base_url() ?>assets/vendor/lucky/jquery.exzoom.js"></script>
+  <script type="text/javascript">
+    $(function(){
+
+      $("#exzoom").exzoom({
+        "autoPlay": false
+      });
+
+    });
+  </script>
+
 </body>
 
 </html>
